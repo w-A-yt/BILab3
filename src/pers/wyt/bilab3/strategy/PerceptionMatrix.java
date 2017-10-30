@@ -1,7 +1,14 @@
 package pers.wyt.bilab3.strategy;
 
+import java.util.Scanner;
+
 public class PerceptionMatrix {
 
+	/**
+	 * S序列与感知矩阵比对获取得分
+	 * @param S
+	 * @return
+	 */
 	public static int Score(String S) {
 		int score = 0;
 		int S_length = S.length();
@@ -10,9 +17,28 @@ public class PerceptionMatrix {
 		return score;
 	}
 
+	/**
+	 * 建立感知矩阵
+	 * @param S_length
+	 * @return
+	 */
 	private static int[][] EstablishedScoreMatrix(int S_length) {
-		int[][] perceptionmatrix = new int[21][S_length + 1];
-		// 简单初始化感知矩阵
+		/**
+		 * 基础单位
+		 * 可从文件读入，选择
+		 * 最后输出矩阵也要用
+		 */
+		String unit = "";
+	
+		//矩阵长度用户输入
+		System.out.println("请输入矩阵长度");
+		Scanner sc = new Scanner(System.in); 
+		int M_length = sc.nextInt();
+		int U_length = unit.length();
+		M_length++;
+		U_length++;
+		int[][] perceptionmatrix = PerceptionMatrix.EstablishedBasicMatrix(U_length ,M_length);
+
 		/**
 		 * 氨基酸默认排序 
 		 * 丙氨酸 Ala A 1 
@@ -36,13 +62,8 @@ public class PerceptionMatrix {
 		 * 酪氨酸 Tyr Y 
 		 * 缬氨酸 Val V
 		 */
-		int i, j;
-		for (i = 1; i < 21; i++) {
-			perceptionmatrix[i][0] = i;
-		}
-		for (j = 1; j < S_length + 1; j++) {
-			perceptionmatrix[0][j] = j;
-		}
+		
+		int i,j;
 		/**
 		 * 输入正反例各50构造感知矩阵
 		 */
@@ -152,6 +173,44 @@ public class PerceptionMatrix {
 				}
 			}
 		}
+		sc.close();
 		return perceptionmatrix;
+	}
+	
+	/**
+	 * 初始化感知矩阵
+	 * @param U_length
+	 * @param M_length
+	 * @return
+	 */
+	private static int[][] EstablishedBasicMatrix(int U_length, int M_length) {	
+		int[][] basicmatrix = new int[U_length][M_length];
+		int i , j;
+		for (i = 1; i < U_length; i++) {
+			basicmatrix[i][0] = i;
+		}
+		for (j = 1; j < M_length + 1; j++) {
+			basicmatrix[0][j] = j;
+		}
+		return basicmatrix;
+	}
+	
+	/**
+	 * 输入正反例各50构造感知矩阵
+	 */
+	private static int[][] EstablishedTrainingMatrix(int[][] basicmatrix) {	
+		int[][] trainingmatrix = null;
+		//或是正例次数和反例次数
+		System.out.println("输入正反例次数");
+		Scanner sc = new Scanner(System.in); 
+		int times = sc.nextInt();
+		int i;
+		for (i = 0;i < times;i++) {
+			//正例从文件读入
+			String PositiveCases = "";
+			
+		}
+		sc.close();
+		return trainingmatrix;
 	}
 }
