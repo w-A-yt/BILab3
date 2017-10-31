@@ -18,7 +18,7 @@ public class Test {
 		//将预测的蛋白质序列
 		String S = "";
 		//进入感知矩阵打分
-		int Ws = PerceptionMatrix.Score(String S);
+		int Ws = PerceptionMatrix.Score(S);
 		//功能位点阈值
 		int T;
 		//非功能位点阈值
